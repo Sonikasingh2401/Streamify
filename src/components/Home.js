@@ -18,10 +18,10 @@ const Home = () => {
         alt='logo'>
         </img>
         </div>
-        <div className='z-10 absolute mx-auto my-52 right-0 left-0 text-center '>
+        <div className='z-10 absolute my-52 right-0 left-0 text-center '>
         <h1 className='p-2 text-5xl text-white font-bold'>Unlimited movies, TV shows and more</h1>
         <h3 className='p-2 text-2xl text-white font-semibold'>Watch Anytime . Anywhere joyfully.</h3>
-        <button className='w-auto m-2 p-3 text-white text-xl font-semibold bg-red-700 absolute rounded-lg' onClick={handleHomebtn}>Get Started ➡️</button>
+        <button className=' p-4 text-white text-xl font-semibold bg-red-700 absolute rounded-lg' onClick={handleHomebtn}>Get Started ➡️</button>
       </div>
     </div>
   );

@@ -32,7 +32,15 @@
 -Build Secondary Components.
 -Build Movie List
 -Build Movie Cards
--TMDB Image IMCDN URL
+-TMDB Image IMG_CDN_URL
+-Made the Browser Page looks like Netflix with tailwing CSS
+-usePopularMovies, useTopRatedMovies useTVShows Custom Hooks were added
+
+
+GPT Search Page
+-GPT Search Bar
+-Multi language feature in our app
+-Integrate OpenAI APIs into our app
 
  
  - Login/Sign up

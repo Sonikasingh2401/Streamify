@@ -7,13 +7,18 @@ import { useEffect } from 'react';
 import {useNavigate} from 'react-router-dom';
 import { signOut } from "firebase/auth";
 import { useSelector } from 'react-redux';
+import { toggleGPTSearchView } from '../utils/gptSlice';
+import { SUPPORTED_LANGUAGES } from '../utils/constant';
+import { changeLanguage } from '../utils/configSlice';
+//import language from './language';
 
 const Header = () => {
 
   const dispatch = useDispatch();   
   const navigate = useNavigate();
 
-  const user = useSelector(store =>store.user)
+  const user = useSelector(store =>store.user);
+  const showgptPage = useSelector(store =>store.gpt.showGptSearch);
 
   const handleSignOut = ()=>{
     signOut(auth).then(() => {
@@ -40,15 +45,39 @@ const Header = () => {
     return () => unsubscribe();
 
   },[]);  
+
+  const handleGPTSearchClick =()=>{
+    // Toggle the GPT Search bar 
+    dispatch(toggleGPTSearchView());
+  }
+
+  const handlelanguageChange = (e)=>{
+    dispatch(changeLanguage(e.target.value));
+  }
+
+
   return (
-    <div className=' w-full absolute text-red-600 font-extrabold text-4xl font-serif p-5 bg-gradient-to-b from-black z-10 flex justify-between'>
-      <h1 className='p-4'>STREAMIFY</h1> 
+    <div className=' w-screen absolute  p-3 bg-gradient-to-b from-black z-10 flex flex-col md:flex-row justify-between'>
+      <h1 className='p-4 text-4xl text-red-600 font-extrabold font-serif'>STREAMIFY</h1> 
       {user &&(
-      <div className='flex'>
-        <img className='hidden md:block w-16 h-16 p-2'
+      <div className='flex h-14 pr-4'>
+        
+        <button className='text-sm bg-purple-700 text-white p-2 m-2 rounded-lg' 
+        onClick={handleGPTSearchClick}>
+          {showgptPage ? "Movies" : "GPT Search"}</button>
+
+        {showgptPage && (
+        <select className='p-2 m-2 rounded-lg text-white bg-slate-700'
+        onChange={handlelanguageChange}>
+          {SUPPORTED_LANGUAGES.map(language => <option key ={language.identifier} value={language.identifier}>{language.name}</option>)} 
+        </select>
+        )}
+
+        <img className='hidden md:block m-2'
         src={user?.photoURL}
         alt='user icon'/>
-        <button className='text-white hover:text-green-700 text-sm text text-'
+        
+        <button className='text-white hover:text-green-700 text-sm font-semibold m-2'
       onClick={handleSignOut}
       >Sign Out</button>
     </div>

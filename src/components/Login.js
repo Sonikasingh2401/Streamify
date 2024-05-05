@@ -5,14 +5,17 @@ import { auth } from '../utils/firebase';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { updateProfile } from "firebase/auth";
 import { useDispatch } from 'react-redux';
+import {useNavigate} from "react-router-dom";
 import { addUser } from '../utils/userSlice';
 import { BG_IMAGE, USER_AVATAR } from '../utils/constant';
+import Home from './Home';
 
 const Login = () => {
 
     const [isSignInForm, setisSignInForm] = useState(true); 
     const [ErrorMessage, setErrorMessage] = useState(null);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const name = useRef(null);
     const email = useRef(null);
@@ -21,6 +24,9 @@ const Login = () => {
     const toggleSignInForm = ()=>{
       setisSignInForm(!isSignInForm);
   }
+    const handlebackbtn =()=>{
+      navigate("/");
+    }
 
     const handlebuttonClick= ()=>{
       // validate the form data
@@ -106,6 +112,7 @@ const Login = () => {
             className='py-4 cursor-pointer' onClick={toggleSignInForm}>
             {isSignInForm ? "New to Streamify ? SIGN UP now." : "Already a user ? Please SIGN IN."}
             </p>
+            <button className= 'ml-28 rounded-sm p-1' onClick={handlebackbtn}> ⬅Back</button>
         </form>
     </div>
   );
